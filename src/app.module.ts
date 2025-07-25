@@ -5,14 +5,17 @@ import { PersonaModule } from './modules/persona/persona.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './modules/usuario/usuario.module';
+import { AuthModule } from './modules/auth/auth.module';
 import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
+import { CommonModule } from './common/common.module';
+import { jwtConfiguration } from './common/constants/jwt.constants';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration, databaseConfig],
+      load: [configuration, databaseConfig, jwtConfiguration],
       envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
     }),
     TypeOrmModule.forRootAsync({
@@ -32,6 +35,9 @@ import databaseConfig from './config/database.config';
     PersonaModule,
 
     UsuarioModule,
+
+    AuthModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],

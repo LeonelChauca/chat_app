@@ -12,7 +12,7 @@ export class Usuario {
   @PrimaryGeneratedColumn()
   id_usuario: number;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()
@@ -24,4 +24,7 @@ export class Usuario {
   @OneToOne(() => Persona, { eager: true })
   @JoinColumn({ name: 'id_persona' })
   persona: Persona;
+
+  @Column({ nullable: true })
+  refresh_token: string;
 }

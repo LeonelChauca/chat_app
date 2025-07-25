@@ -13,4 +13,8 @@ export class CreateUsuarioDto {
 
   @IsNumber()
   id_persona: number;
+
+  @IsString()
+  @IsOptional()
+  refresh_token?: string;
 }
